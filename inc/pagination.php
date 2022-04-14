@@ -48,28 +48,27 @@ function marvel_pagination(){
     
     ob_start();
     ?>
-
     <div class="pagination">
         <? if(count($links_data) > 1) : ?>
-                <ul>
-                    <?php foreach( $links_data as $link ) : ?>
-                    <li>
-                    <? if($link->is_current) : ?>
-                            <span class="activ_pag_link"><?=$link->page_num?></span>
-                    <? else : ?>
-                            <a class="pagination_link" href="<?php esc_attr_e( $link->url ) ?>" data-num="<?php _e( $link->page_num ) ?>"><?php _e( $link->page_num ) ?></a>
-                    </li>
-                    <?php endif; ?>
-                    <? endforeach;?>
-                    
-                </ul>
+        <ul>
+            <?php foreach( $links_data as $link ) { ?>
+            <li>
+                <? if($link->is_current) {
+                    echo '<span class="activ_pag_link">'.$link->page_num.'</span>';
+                } else { ?>
+                    <a class="pagination_link" href="<?php esc_attr_e( $link->url ) ?>" data-num="<?php _e( $link->page_num ) ?>"><?php _e( $link->page_num ) ?></a>
+                    <? } ?>
+            </li>
+            <?php } 
+                //$link->is_current - активный элемент
+            ?>
+        </ul>
         <? endif; ?>
     </div><!-- end nav -->
-
-    <?
-      $output = ob_get_contents();
-      ob_end_clean();
-      echo $output;
-    ?>
-
-<? } ?>     
+        <?
+    $output = ob_get_contents();
+    ob_end_clean();
+    echo $output;
+    }
+// для использования marvel_paginayion()
+?>

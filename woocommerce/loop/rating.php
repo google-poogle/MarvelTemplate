@@ -24,6 +24,7 @@ global $product;
 if ( ! wc_review_ratings_enabled() ) {
 	return;
 }
+var_dump($product->get_average_rating());
 if(wc_get_rating_html( $product->get_average_rating() )) {
 	echo wc_get_rating_html( $product->get_average_rating() ); // WordPress.XSS.EscapeOutput.OutputNotEscaped.
 }else {
